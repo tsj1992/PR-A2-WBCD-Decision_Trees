@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[184]:
+# In[1]:
 
 
 import numpy as np
@@ -15,25 +15,25 @@ from sklearn import preprocessing
 import matplotlib.pyplot as plt
 
 
-# In[185]:
+# In[2]:
 
 
-data_set = pd.read_csv(r"D:\MSc\Semester 1\CS5612 - Pattern Recognition\Assignment 2\WBCD\breast-cancer-wisconsin.data_MISSING_DATA_ROWS_REMOVED.csv")
+data_set = pd.read_csv("breast-cancer-wisconsin.data_MISSING_DATA_ROWS_REMOVED.csv")
 
 
-# In[186]:
+# In[3]:
 
 
 data_clean = data_set.dropna()
 
 
-# In[187]:
+# In[4]:
 
 
 print(data_clean.describe())
 
 
-# In[188]:
+# In[5]:
 
 
 predictors = data_clean[[
@@ -50,44 +50,34 @@ predictors = data_clean[[
 ]]
 
 
-# In[189]:
+# In[6]:
 
 
 targets = data_clean.target
 
 
-# In[190]:
+# In[7]:
 
 
 pred_train, pred_test, targ_train, targ_test = train_test_split(predictors, targets, test_size = 0.35)
 
 
-# In[191]:
+# In[8]:
 
 
 classifier = DecisionTreeClassifier()
 classifier = classifier.fit(pred_train, targ_train)
 
 
-# In[192]:
+# In[9]:
 
 
 predictions = classifier.predict(pred_test)
 
 
-# In[193]:
+# In[10]:
 
 
 print(confusion_matrix(targ_test, predictions))
 print(accuracy_score(targ_test, predictions))
-
-
-# In[194]:
-
-
-from sklearn import tree
-from io import StringIO
-from IPython.display import Image
-with open("wbcd_classifier.txt", "w") as f:
-    f = tree.export_graphviz(classifier, out_file=f)
 
